@@ -6,6 +6,7 @@ Where-Object { $_.DisplayName }
 $software | Select-Object DisplayName, DisplayVersion, Publisher |
 Sort-Object DisplayName |
 Format-Table -AutoSize
+#Primary outcome: What software is installed on this machine?
 
 # Service Restart Automation Tool-Project 9
 
@@ -13,3 +14,4 @@ $services = Get-Service | Where-Object { $_.Status -eq "Stopped" }
 
 $services | Select-Object Name, DisplayName, Status |
 Format-Table -AutoSize
+#Primary outcome: Which services are stopped?
