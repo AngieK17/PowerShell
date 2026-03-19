@@ -1,34 +1,57 @@
-# Example data sets
-$processes = Get-Process | Select-Object -First 5 Name, Id, CPU
-$services  = Get-Service | Select-Object -First 5 Name, Status, StartType
+# Date Report Tool
 
-# Create HTML fragments
-$processFragment = $processes | ConvertTo-Html -Fragment -PreContent "<h2>Top 5 Processes</h2>"
-$serviceFragment = $services  | ConvertTo-Html -Fragment -PreContent "<h2>Top 5 Services</h2>"
+# Create folder if it doesn't exist
+$folder = "C:\Temp"
 
-# Combine fragments into a full HTML page
-$fullHtml = @"
-<html>
-<head>
-    <title>System Report</title>
-    <style>
-        body { font-family: Arial; margin: 20px; }
-        table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        h2 { color: #333; }
-    </style>
-</head>
-<body>
-<h1>System Report</h1>
-$processFragment
-$serviceFragment
-</body>
-</html>
+if (-not (Test-Path $folder)) {
+    New-Item -Path $folder -ItemType Directory | Out-Null
+}
+
+# Get current date and time
+$now = Get-Date
+
+# Create custom object
+$data = [PSCustomObject]@{
+    Date      = $now.ToShortDateString()
+    Time      = $now.ToLongTimeString()
+    Day       = $now.DayOfWeek
+    Month     = $now.Month
+    Year      = $now.Year
+}
+
+# Simple HTML style
+$style = @"
+<style>
+body {
+    font-family: Arial;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+h1 {
+    color: navy;
+}
+table {
+    border-collapse: collapse;
+    width: 50%;
+    background-color: white;
+}
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: lightgray;
+}
+</style>
 "@
 
-# Save to file
-$outputPath = "SystemReport.html"
-$fullHtml | Out-File -FilePath $outputPath -Encoding UTF8
+# File path
+$file = "$folder\DateReport.html"
 
-Write-Host "HTML report generated: $outputPath"
+# Create HTML report
+$data | ConvertTo-Html -Head $style -Title "Today's Date Report" -PreContent "<h1>Today's Date Report</h1>" |
+Out-File $file
+
+# Open the report
+Start-Process $file
