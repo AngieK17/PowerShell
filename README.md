@@ -14,7 +14,7 @@ Currently focused on developing my skills in **cloud administration, automation,
 - Microsoft Software & Systems Academy (MSSA)
 - Active Directory administration labs
 - PowerShell automation
-- Cloud infrastructure fundamentals
+- Cloud infrastructure
 
 ---
 
