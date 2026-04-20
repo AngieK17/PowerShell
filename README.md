@@ -2,7 +2,7 @@
 MSSA PSCA18
 a|k
 
-Veteran | Military Spouse | Cloud & Security Enthusiast  
+Veteran | Cloud & Security Enthusiast  
 
 I'm passionate about solving problems with technology and building systems that make people's lives easier.  
 Currently focused on developing my skills in **cloud administration, automation, and cybersecurity**.
@@ -25,7 +25,7 @@ Currently focused on developing my skills in **cloud administration, automation,
 - Windows Server
 - Azure (learning)
 - Git & GitHub
-- Networking fundamentals
+- Networking 
 
 ---
 
